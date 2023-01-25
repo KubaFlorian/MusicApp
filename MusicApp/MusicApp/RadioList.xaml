@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
+             xmlns:vm="clr-namespace:MusicApp.ViewModel"
+             mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
+             x:Class="MusicApp.RadioList">
+
+    <ContentPage.BindingContext>
+        <vm:RadioListViewModel />
+    </ContentPage.BindingContext>
+
+    <pv:PancakeView HasShadow="True" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundGradientAngle="132">
+        <pv:PancakeView.BackgroundGradientStops>
+            <pv:GradientStopCollection>
+                <pv:GradientStop Color="#002828" Offset="0" />
+                <pv:GradientStop Color="#00032C" Offset="0.5" />
+                <pv:GradientStop Color="#0D0029" Offset="1" />
+            </pv:GradientStopCollection>
+        </pv:PancakeView.BackgroundGradientStops>
+        <Grid RowSpacing="30" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackLayout Orientation="Horizontal" Margin="20,5">
+                <Image Source="music.png" HeightRequest="20" WidthRequest="20" Margin="0,20,0,0">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="radio" Tapped="radio_Tapped"></TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Text="STACJE RADIOWE" TextColor="White" Opacity="0.7" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Margin="0,20,0,0"/>
+            </StackLayout>
+            <CollectionView Grid.Row="1" Margin="20,10" ItemsSource="{Binding RadioList}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                            SelectionMode="Single" SelectedItem="{Binding SelectedRadio}" SelectionChangedCommand="{Binding SelectionCommand}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="1"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid BackgroundColor="Transparent" Padding="15,10" HorizontalOptions="FillAndExpand">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding radioCover}" HeightRequest="40" WidthRequest="40" Aspect="AspectFill" Grid.Column="0"/>
+                            <StackLayout VerticalOptions="Center" Grid.Column="1">
+                                <Label Text="{Binding radioName}" TextColor="White" FontSize="19"/>
+                            </StackLayout>
+                            <pv:PancakeView HasShadow="True" HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="End" VerticalOptions="Center" 
+                                            BackgroundGradientAngle="180" Grid.Column="2">
+                                <pv:PancakeView.BackgroundGradientStops>
+                                    <pv:GradientStopCollection>
+                                        <pv:GradientStop Color="#E3E7EE" Offset="0" />
+                                        <pv:GradientStop Color="#FBFBFB" Offset="1" />
+                                    </pv:GradientStopCollection>
+                                </pv:PancakeView.BackgroundGradientStops>
+                                <Image Source="playBlack.png" WidthRequest="10" HeightRequest="12" HorizontalOptions="Center" VerticalOptions="Center" />
+                            </pv:PancakeView>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </pv:PancakeView>
+</ContentPage>

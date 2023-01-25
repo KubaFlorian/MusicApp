@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 x:Class="MusicApp.Popups.AddToPlaylist">
+
+    <StackLayout Margin="20" Padding="24" Spacing="24" BackgroundColor="WhiteSmoke" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="250">
+        <StackLayout Orientation="Vertical">
+            <Label Text="Create Playlist" FontSize="17" />
+            <CollectionView x:Name="addToPlaylist" ItemsSource="{Binding PlaylistList}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" SelectionMode="Single">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="1"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid BackgroundColor="Transparent" Padding="15,10" HorizontalOptions="FillAndExpand">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout VerticalOptions="Center" Grid.Column="1">
+                                <Label Text="{Binding playlistName}" TextColor="Black" FontSize="15"/>
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+        <Button BackgroundColor="DarkGreen" FontSize="17" FontAttributes="Bold" Text="Create" Clicked="Handle_Clicked" TextColor="White" />
+    </StackLayout>
+
+</pages:PopupPage>
